@@ -22,7 +22,9 @@ namespace Interface03
 
         private void button1_Click(object sender, EventArgs e)
         {
-            plane = new Plane(new Engine("F-200", 390), new Chassis("S-199", 8), new Chassis("S-199B", 18), new Wing(175, "PEG-17"));
+            plane = new Plane(new Engine("F-200", 390), 
+                new List<Chassis> { new Chassis("S-199", 8), new Chassis("S-199B", 18), new Chassis("S-199B", 18) }, 
+                new List<Wing> { new Wing(175, "PEG-17"),new Wing(175, "PEG-17")});
             setButtons();
             button5.Enabled = true;
             textBox5.Enabled = true;
@@ -68,7 +70,7 @@ namespace Interface03
             int size = 0;
             if (textBox5.Text.Trim() != "" && textBox6.Text.Trim() != "" && int.TryParse(textBox6.Text,out size))
             {
-                plane.SetNewChassis(new Chassis(textBox5.Text, size));
+                plane.SetNewChassis(new List<Chassis> { new Chassis(textBox5.Text, size), new Chassis(textBox5.Text, size) });
                 UpdateText();
                 textBox5.Text = "";
                 textBox6.Text = "";

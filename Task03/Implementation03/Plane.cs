@@ -12,24 +12,15 @@ namespace Implementation03
 
         private Engine Engine { get; set; }
 
-        private Chassis ChassisS { get; set; }
+        private List<Chassis> Chassis { get; set; }
 
-        private Chassis ChassisBL { get; set; }
+        private List<Wing> Wings { get; set; }
 
-        private Chassis ChassisBR { get; set; }
-
-        private Wing WingLeft { get; set; }
-
-        private Wing WingRight { get; set; }
-
-        public Plane(Engine engine,Chassis chassisS, Chassis chassis, Wing wing)
+        public Plane(Engine engine, List<Chassis> chassis, List<Wing> wings)
         {
             Engine = engine;
-            ChassisS = chassisS;
-            ChassisBL = chassis;
-            ChassisBR = chassis;
-            WingLeft = wing;
-            WingRight = wing;
+            Chassis = chassis;
+            Wings = wings;
         }
 
         public string Fly()
@@ -47,20 +38,20 @@ namespace Implementation03
             return Map;
         }
 
-        public void SetNewChassis(Chassis Chassis)
+        public void SetNewChassis(List<Chassis> chassis)
         {
-            ChassisBL = Chassis;
-            ChassisBR = Chassis;
+            Chassis[1] = chassis[0];
+            Chassis[2] = chassis[1];
         }
 
         public string GetInfoAboutPlane()
         {
             return "Двигатель: " + Engine.GetInfo() +
-                    "\nЛевое крыло: " + WingLeft.GetInfo() +
-                    "\nПравое крыло: " + WingRight.GetInfo() +
-                    "\nПереднее шасси: " + ChassisS.GetInfo() +
-                    "\nЛевое заднее шасси: " + ChassisBL.GetInfo() +
-                    "\nПравое заднее шасси: " + ChassisBR.GetInfo();
+                    "\nЛевое крыло: " + Wings[0].GetInfo() +
+                    "\nПравое крыло: " + Wings[1].GetInfo() +
+                    "\nПереднее шасси: " + Chassis[0].GetInfo() +
+                    "\nЛевое заднее шасси: " + Chassis[1].GetInfo() +
+                    "\nПравое заднее шасси: " + Chassis[2].GetInfo();
         }
     }
 }
