@@ -33,5 +33,7 @@ namespace Employees
         public abstract int ToCalculateWages();
 
         public abstract bool VacationStatus();
+
+        public abstract string GetInfo();
     }
 }

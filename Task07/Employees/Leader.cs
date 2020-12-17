@@ -24,13 +24,10 @@ namespace Employees
 
         public Leader(string name, int age, int experience, int countOfProjects)
         {
-            Name = name;
+            Name = name.Trim();
             Age = age;
             Experience = experience;
             CountOfProjects = countOfProjects;
-            BusinessTripStatus = 0;
-            BusinessTripDate = "";
-            Vacation = "";
         }
 
         public override int ToCalculateWages()
@@ -45,7 +42,12 @@ namespace Employees
 
         public override bool VacationStatus()
         {
-            return BusinessTripStatus == 2 ? true : false;
+            if (BusinessTripStatus == 2)
+            {
+                BusinessTripDate = GenerateDateTrip();
+                return true;
+            }
+            return false;
         }
 
         public string CheckVacationStatus()
@@ -74,7 +76,7 @@ namespace Employees
             return $"{v1}.{v2}";
         }
 
-        public string GetInfo(int index)
+        public override string GetInfo()
         {
             string text = "Информация о сотруднике:" +
                             "\r\nФИО: " + Name +

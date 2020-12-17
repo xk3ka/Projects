@@ -44,5 +44,11 @@ namespace MainWindow
             Interface06.Form06 form = new Interface06.Form06();
             form.Show();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Interface07.Form07 form = new Interface07.Form07();
+            form.Show();
+        }
     }
 }

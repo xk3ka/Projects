@@ -7,78 +7,40 @@ using System.Threading.Tasks;
 
 namespace Implementation07
 {
-    public class DataList
+    public class DataList 
     {
-        public List<Leader> Leaders { get; set; }
+        public List<Engineer> Engineers { get; set; }
 
         public DataList()
         {
-            Leaders = new List<Leader>();
+            Engineers = new List<Engineer>();
         }
 
-        public List<Leader> GetList() => Leaders;
-
-        public void AddEmployee(Leader leader)
+        public void AddLeader(Leader eng)
         {
-            Leaders.Add(leader);
+            Engineers.Add(eng);
         }
 
-        public void RemoveEmployee(Leader leader)
+        public void AddJuniorEngineer(JuniorEngineer eng)
         {
-            Leaders.Remove(leader);
-
+            Engineers.Add(eng);
         }
 
-        public string GetInfo(int index)
+        public void AddSeniorEngineer(SeniorEngineer eng)
         {
-            string text = "Информация о сотруднике:" +
-                            "\r\nФИО: " + Leaders[index].Name +
-                            "\r\nВозраст: " + Leaders[index].Age +
-                            "\r\nОпыт работы: " + Leaders[index].Experience +
-                            "\r\nКоличество выполненых проектов: " + Leaders[index].CountOfProjects +
-                            "\r\n" + Leaders[index].CalculateAnnualIncome() +
-                            "\r\n" + Leaders[index].CheckVacationStatus() +
-                            "\r\n";
-            switch (Leaders[index].BusinessTripStatus)
+            Engineers.Add(eng);
+        }
+
+        public bool Contains(string name)
+        {
+            foreach (Engineer ListEng in Engineers)
             {
-                case 1:
-                    text += "\r\nИнформация о командировке:" +
-                        "\r\n" + Leaders[index].InBusinessTrip();
-                    break;
-                case 2:
-                    text += "\r\nИнформация о командировке:" +
-                        "\r\n" + Leaders[index].ReturnFromBusinessTrip() +
-                        "\r\n" + Leaders[index].BusinessTripDate;
-                    break;
+                if (name == ListEng.Name)
+                {
+                    return true;
+                }
             }
-            return text;
-        }
-
-        public string GenerateDateTrip()
-        {
-            string ResultDate = "";
-            Random rnd = new Random();
-            int v1 = rnd.Next(1, 15);
-            int v2 = rnd.Next(1, 12);
-            int v3 = 2020;
-
-            ResultDate = $"Был в командировке с {v1}.{v2}.{v3} до {v1}.{GenerateMouthAndYear(v2, v3)}.";
-
-            return ResultDate;
-        }
-
-        public string GenerateMouthAndYear(int v1, int v2)
-        {
-            string ResultDate = "";
-            Random rnd = new Random();
-            v1 += rnd.Next(1, 5);
-            if (v1 > 12)
-            {
-                v1 -= 12;
-                v2++;
-            }
-            ResultDate = $"{v1}.{v2}";
-            return ResultDate;
+            return false;
         }
 
     }
