@@ -45,7 +45,6 @@ namespace Employees
         {
             if (BusinessTripStatus == 2)
             {
-                BusinessTripDate = GenerateDateTrip();
                 return true;
             }
             return false;
@@ -56,13 +55,13 @@ namespace Employees
             return VacationStatus() ? $"Сотруднику доступен отпуск." : $"Сотруднику недоступен отпуск.";
         }
 
-        private string GenerateDateTrip()
+        public override void GenerateDateTrip()
         {
             Random rnd = new Random();
             int v1 = rnd.Next(1, 15);
             int v2 = rnd.Next(1, 12);
             int v3 = 2020;
-            return $"Был в командировке с {v1}.{v2}.{v3} до {v1}.{GenerateMouthAndYear(v2, v3)}.";
+            BusinessTripDate = $"Был в командировке с {v1}.{v2}.{v3} до {v1}.{GenerateMouthAndYear(v2, v3)}.";
         }
 
         private string GenerateMouthAndYear(int v1, int v2)

@@ -20,15 +20,26 @@ namespace Employees
 
         public string InBusinessTrip()
         {
+            if (BusinessTripStatus != 0)
+            {
+                throw new SystemException();
+            }
             BusinessTripStatus = 1;
             return $"'{Name}' отправлен в командировку.";
         }
 
         public string ReturnFromBusinessTrip()
         {
+            if (BusinessTripStatus != 1)
+            {
+                throw new SystemException();
+            }
+
             BusinessTripStatus = 2;
             return $"'{Name}' вернулся из командировки.";
         }
+
+        public abstract void GenerateDateTrip();
 
         public abstract int ToCalculateWages();
 
