@@ -34,7 +34,7 @@ namespace Employees
             {
                 throw new SystemException();
             }
-
+            GenerateDateTrip();
             BusinessTripStatus = 2;
             return $"'{Name}' вернулся из командировки.";
         }
