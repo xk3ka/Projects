@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -9,6 +10,8 @@ namespace Implementation08
 {
     public class MechanicSlow : IMechanic
     {
+        public Image MechanicStay { get; set; } = Image.FromFile("A:\\source\\ISIT\\Task08\\resources\\mechanicStay.png");
+        public Image MechanicMove { get; set; } = Image.FromFile("A:\\source\\ISIT\\Task08\\resources\\mechanicMove.png");
         public Coord BaseCoord { get; set; }
         public Coord NextCoord { get; set; }
 
@@ -66,6 +69,19 @@ namespace Implementation08
                     GoTo(BaseCoord);
                 }
             }
+        }
+
+        public void Paint(Graphics g)
+        {
+            if (OnBase())
+            {
+                g.DrawImage(MechanicStay, NextCoord.X, NextCoord.Y, 100, 100);
+            }
+            else
+            {
+                g.DrawImage(MechanicMove, NextCoord.X, NextCoord.Y, 100, 100);
+            }
+
         }
     }
 }

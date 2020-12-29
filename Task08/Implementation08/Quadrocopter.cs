@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -9,6 +10,10 @@ namespace Implementation08
 {
     public class Quadrocopter
     {
+        public Image QuadOff = Image.FromFile("A:\\source\\ISIT\\Task08\\resources\\quadOff.png");
+        public Image QuadOn = Image.FromFile("A:\\source\\ISIT\\Task08\\resources\\quadOn.png");
+        public Image QuadBoom = Image.FromFile("A:\\source\\ISIT\\Task08\\resources\\quadBoom.png");
+
         public event Emulator.NeedHelp OnBreak;
         /*нужен еще какой то путь
         либо определенный
@@ -18,7 +23,6 @@ namespace Implementation08
         public Route Route { get; set; }
         public Coord MyCoord { get; set; }
         public Coord NextCoord { get; set; }
-        public Operator Operator { get; set; }
         public bool QuadStatus { get; set; }
         public bool NeedHelp { get; set; }
         public int DisabledChance { get; set; }
@@ -75,6 +79,20 @@ namespace Implementation08
                 return true;
             }
             return false;
+        }
+
+        public void Paint(Graphics g)
+        {
+            /*if() сломался то сломался*/
+
+            if (QuadStatus)
+            {
+                g.DrawImage(QuadOn,MyCoord.X,MyCoord.Y,100,100);
+            }
+            else
+            {
+                g.DrawImage(QuadOff, MyCoord.X, MyCoord.Y, 100, 100);
+            }
         }
     }
 }

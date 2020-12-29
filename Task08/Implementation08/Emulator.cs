@@ -9,30 +9,31 @@ namespace Implementation08
 {
     public class Emulator
     {
-        public List<Quadrocopter> Quadrocopters { get; set; } = new List<Quadrocopter>();
+        public List<Operator> Operators { get; set; } = new List<Operator>();
         public IMechanic Mechanic { get; set; }
 
         private List<Thread> Threads = new List<Thread>();
 
         public delegate void NeedHelp(Quadrocopter quad);
+        public delegate void OnQuad(Operator op);
 
-        public Emulator(List<Quadrocopter> quadrocopters, IMechanic mechanic)
+        public Emulator(List<Operator> operators, IMechanic mechanic)
         {
-            Quadrocopters = quadrocopters;
+            Operators = operators;
             Mechanic = mechanic;
         }
 
         public void Start()
         {
-            foreach(Quadrocopter quad in Quadrocopters)
+            foreach(Operator @operator in Operators)
             {
-                quad.OnBreak += Mechanic.NeedToBeFixed;
-                Thread quadThread = new Thread(quad.Start);
-                quadThread.Start();
-                Thread operatorThread = new Thread(quad.Operator.Start);
+                Thread operatorThread = new Thread(@operator.Start);
                 operatorThread.Start();
-                Threads.Add(quadThread);
+                @operator.Quadrocopter.OnBreak += Mechanic.NeedToBeFixed;
+                Thread quadThread = new Thread(@operator.Quadrocopter.Start);
+                quadThread.Start();
                 Threads.Add(operatorThread);
+                Threads.Add(quadThread);
             }
             Thread mechanicThread = new Thread(Mechanic.Start);
             mechanicThread.Start();
@@ -41,7 +42,7 @@ namespace Implementation08
 
         public void Stop()
         {
-            foreach (var thread in Threads)
+            foreach (Thread thread in Threads)
             {
                 thread.Abort();
             }
