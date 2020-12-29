@@ -16,7 +16,7 @@ namespace Implementation08
         public Image OperatorOff = Image.FromFile("A:\\source\\ISIT\\Task08\\resources\\operatorOff.png");
         public Image OperatorOn = Image.FromFile("A:\\source\\ISIT\\Task08\\resources\\operatorOn.png");
         public Image OperatorBroken = Image.FromFile("A:\\source\\ISIT\\Task08\\resources\\operatorBroken.png");
-
+        public event Emulator.MethodContainer OnActionWriting;
         public Operator(Quadrocopter quadrocopter)
         {
             Quadrocopter = quadrocopter;
@@ -29,7 +29,7 @@ namespace Implementation08
             {
                 if (!Quadrocopter.QuadStatus)
                 {
-                    break;
+                    
                 }
                 Thread.Sleep(100);
             }
@@ -41,19 +41,26 @@ namespace Implementation08
             Thread.Sleep(100);
             Quadrocopter.QuadStatus = true;
             OnQuad?.Invoke(this);
+            Quadrocopter.Start();
+            OnActionWritingFunction("quad On");
             /**/
+        }
+
+        public virtual void OnActionWritingFunction(string message)
+        {
+            OnActionWriting?.Invoke(message);
         }
 
         public void Paint(Graphics g)
         {
 
-            if (Quadrocopter.QuadStatus)
+            if (!Quadrocopter.NeedHelp)
             {
                 g.DrawImage(OperatorOn, 10, 10, 100, 100);
             }
             else
             {
-                g.DrawImage(OperatorOn, 10, 10, 100, 100);
+                g.DrawImage(OperatorOff, 10, 10, 100, 100);
             }
         }
     }

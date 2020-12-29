@@ -14,7 +14,7 @@ namespace Interface08
 {
     public partial class Form08 : Form
     {
-        //private ClassLooker _classLooker;
+        private ClassInfo _classinfo;
         private Emulator _emulator;
         private Thread _repaintThread = null;
         private List<Type> _types = new List<Type>();
@@ -25,7 +25,8 @@ namespace Interface08
             InitializeComponent();
             panel1.Paint += panel1_Paint;
 
-            //_classLooker = new ClassLooker(@"A:\source\ISIT\Task08\Interface08\bin\Debug\Implementation08.dll");
+            _classinfo = new ClassInfo(@"A:\source\ISIT\Task08\Interface08\bin\Debug\Implementation08.dll");
+            SetMechanic();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -47,7 +48,9 @@ namespace Interface08
                 }
 
                 Step *= 5;
-                IMechanic mechanic = new MechanicDefault(new Coord(panel1.Width / 2, panel1.Height / 2, Step), (new Coord(panel1.Width / 2, panel1.Height / 2, Step)));
+                IMechanic mechanic = (IMechanic)Activator.CreateInstance(_types[comboBox1.SelectedIndex]);
+                mechanic.BaseCoord = new Coord(panel1.Width / 2, panel1.Height / 2, Step);
+                mechanic.NextCoord = new Coord(panel1.Width / 2, panel1.Height / 2, Step);
                 _emulator = new Emulator(allOperators, mechanic);
                 _emulator.Start();
                 _repaintThread = new Thread(PanelRepaint);
@@ -62,6 +65,14 @@ namespace Interface08
                 button1.Text = @"Start";
             }
 
+        }
+        private void SetMechanic()
+        {
+            foreach (var mechanic in _classinfo.ChildrensAndImpls(typeof(IMechanic)))
+            {
+                _types.Add(mechanic);
+            }
+            UpdateComboBox();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -98,6 +109,17 @@ namespace Interface08
         {
             _emulator?.Stop();
             _repaintThread?.Abort();
+        }
+
+        public void UpdateComboBox()
+        {
+            List<String> list = new List<string>();
+            foreach(var mechanic in _types)
+            {
+                list.Add(mechanic.Name);
+            }
+            comboBox1.DataSource = null;
+            comboBox1.DataSource = list;
         }
     }
 }

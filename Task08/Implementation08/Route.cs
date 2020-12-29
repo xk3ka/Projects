@@ -8,7 +8,7 @@ namespace Implementation08
 {
     public class Route
     {
-        public List<Coord> RouteCoord { get; set; }
+        public List<Coord> RouteCoord { get; }
 
         private int index = 0;
 

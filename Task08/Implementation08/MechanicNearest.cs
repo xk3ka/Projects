@@ -23,10 +23,16 @@ namespace Implementation08
             NextCoord = nextCoord;
         }
 
+        public MechanicNearest()
+        {
+
+        }
+
         public void FixQuadrocopter(Quadrocopter quad)
         {
             Thread.Sleep(2000);
             quad.NeedHelp = false;
+            quad.BrokenStatus = false;
             /**/
             HelpList.Remove(quad);
         }
