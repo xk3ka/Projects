@@ -49,7 +49,7 @@ namespace Interface08
             if (_repaintThread == null)
             {
                 List<Operator> allOperators = new List<Operator>();
-                int Step = 2;
+                int Step = 4;
                 for (int i = 0; i < (int)numericUpDown2.Value; i++)
                 {
                     Quadrocopter q = new Quadrocopter(new Route(
