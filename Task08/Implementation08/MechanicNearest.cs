@@ -10,8 +10,6 @@ namespace Implementation08
 {
     public class MechanicNearest : IMechanic
     {
-        public Image MechanicStay { get; set; } = Image.FromFile("A:\\source\\ISIT\\Task08\\resources\\mechanicStay.png");
-        public Image MechanicMove { get; set; } = Image.FromFile("A:\\source\\ISIT\\Task08\\resources\\mechanicMove.png");
         public Coord BaseCoord { get; set; }
         public Coord NextCoord { get; set; }
 
@@ -32,8 +30,6 @@ namespace Implementation08
         {
             Thread.Sleep(2000);
             quad.NeedHelp = false;
-            quad.BrokenStatus = false;
-            /**/
             HelpList.Remove(quad);
         }
 
@@ -96,18 +92,6 @@ namespace Implementation08
                     FixQuadrocopter(q);
                 }
             }
-        }
-        public void Paint(Graphics g)
-        {
-            if (OnBase())
-            {
-                g.DrawImage(MechanicStay, NextCoord.X, NextCoord.Y, 100, 100);
-            }
-            else
-            {
-                g.DrawImage(MechanicMove, NextCoord.X, NextCoord.Y, 100, 100);
-            }
-
         }
     }
 }

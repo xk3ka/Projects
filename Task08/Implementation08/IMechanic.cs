@@ -9,8 +9,6 @@ namespace Implementation08
 {
     public interface IMechanic
     {
-        Image MechanicStay { get; set; }
-        Image MechanicMove { get; set; }
         Coord BaseCoord { get; set; }
         Coord NextCoord { get; set; }
 
@@ -19,6 +17,5 @@ namespace Implementation08
         void GoTo(Coord coord);
         void NeedToBeFixed(Quadrocopter quad);
         void FixQuadrocopter(Quadrocopter quad);
-        void Paint(Graphics g);
     }
 }
