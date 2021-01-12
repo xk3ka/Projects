@@ -49,18 +49,18 @@ namespace Implementation08
         public Quadrocopter NextTo()
         {
             Quadrocopter q = null;
-            foreach (var trolleyBuss in HelpList)
+            foreach (var quadrocopter in HelpList)
             {
                 if (q == null)
                 {
-                    q = trolleyBuss;
+                    q = quadrocopter;
                 }
                 else
                 {
                     if (NextCoord.Distance(q.MyCoord) >
-                        NextCoord.Distance(trolleyBuss.MyCoord))
+                        NextCoord.Distance(quadrocopter.MyCoord))
                     {
-                        q = trolleyBuss;
+                        q = quadrocopter;
                     }
                 }
             }
