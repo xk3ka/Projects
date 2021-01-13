@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Implementation08
 {
-    public class Emulator
+    public class Abstraction
     {
         public delegate void NeedHelp(Quadrocopter quad);
         public delegate void OnQuad();
@@ -19,7 +19,7 @@ namespace Implementation08
         public IMechanic Mechanic { get; set; }
         public Random Random { get; set; }
 
-        public Emulator(List<Operator> operators, IMechanic mechanic)
+        public Abstraction(List<Operator> operators, IMechanic mechanic)
         {
             Operators = operators;
             Mechanic = mechanic;

@@ -15,7 +15,7 @@ namespace Interface08
     public partial class Form08 : Form
     {
         private ClassInfo _classinfo;
-        private Emulator _emulator;
+        private Abstraction _emulator;
         private Thread _repaintThread = null;
         private List<Type> _types = new List<Type>();
 
@@ -65,7 +65,7 @@ namespace Interface08
                 IMechanic mechanic = (IMechanic)Activator.CreateInstance(_types[comboBox1.SelectedIndex]);
                 mechanic.BaseCoord = new Coord(panel1.Width / 2, panel1.Height - 75, Step);
                 mechanic.NextCoord = new Coord(panel1.Width / 2, panel1.Height - 75, Step);
-                _emulator = new Emulator(allOperators, mechanic);
+                _emulator = new Abstraction(allOperators, mechanic);
                 _emulator.Start();
                 _repaintThread = new Thread(PanelRepaint)
                 {

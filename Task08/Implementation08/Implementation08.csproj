@@ -44,9 +44,9 @@
   <ItemGroup>
     <Compile Include="ClassInfo.cs" />
     <Compile Include="Coord.cs" />
-    <Compile Include="Emulator.cs" />
+    <Compile Include="Abstraction.cs" />
     <Compile Include="IMechanic.cs" />
-    <Compile Include="MechanicDefault.cs" />
+    <Compile Include="Mechanic.cs" />
     <Compile Include="MechanicNearest.cs" />
     <Compile Include="MechanicSlow.cs" />
     <Compile Include="Operator.cs" />

@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace Implementation08
 {
-    public class MechanicDefault : IMechanic
+    public class Mechanic : IMechanic
     {
         public Coord BaseCoord { get; set; }
         public Coord NextCoord { get; set; }
 
         public List<Quadrocopter> HelpList { get; set; } = new List<Quadrocopter>();
 
-        public MechanicDefault(Coord baseCoord,Coord nextCoord)
+        public Mechanic(Coord baseCoord,Coord nextCoord)
         {
             BaseCoord = baseCoord;
             NextCoord = nextCoord;
         }
 
-        public MechanicDefault()
+        public Mechanic()
         {
 
         }

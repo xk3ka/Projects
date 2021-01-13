@@ -10,7 +10,7 @@ namespace Implementation08
 {
     public class Operator
     {
-        public event Emulator.OnQuad RemoteControl;
+        public event Abstraction.OnQuad RemoteControl;
 
         public Quadrocopter Quadrocopter { get; set; }
         public Coord MyCoord { get; set; }

@@ -10,7 +10,7 @@ namespace Implementation08
 {
     public class Quadrocopter
     {
-        public event Emulator.NeedHelp OnBreak;
+        public event Abstraction.NeedHelp OnBreak;
 
         public Route Route { get; set; }
         public Coord MyCoord { get; set; }
